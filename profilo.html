@@ -1,5 +1,10 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo - Toelettatura Zampa Felice</title>
+    <!-- Favicon removed as per instruction -->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link
       rel="stylesheet"
@@ -7,172 +12,517 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
     />
-
-    <title>Stitch Design</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
-  <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-white justify-between group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto; /* 10% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px;
+            border-radius: 8px;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-100" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+    <div class="relative flex size-full min-h-screen flex-col bg-white justify-between group/design-root overflow-x-hidden">
       <div>
         <div class="flex items-center bg-white p-4 pb-2 justify-between">
-          <div class="text-[#111518] flex size-12 shrink-0 items-center" data-icon="ArrowLeft" data-size="24px" data-weight="regular">
+          <a href="home.html" class="text-[#111518] flex size-12 shrink-0 items-center" data-icon="ArrowLeft" data-size="24px" data-weight="regular">
             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
               <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
             </svg>
-          </div>
+          </a>
           <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Profilo</h2>
         </div>
+        
+        <!-- User Info -->
         <div class="flex p-4 @container">
           <div class="flex w-full flex-col gap-4 items-center">
             <div class="flex gap-4 flex-col items-center">
               <div
                 class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDVS9OYY9PzU7ZhehQ-VN9NKy_8dUo3DHptmvfEvu2MDlfmV9bbTjMFvj5Cv2Hu-C8WKpUXXXf9RJwNqra4YJaQxlNIQ1J1h2gw2pvPkIhUqLksUyrwN4u6dQew5dA76Q24F14mlJzJ9YMrGyMRPT3uJDxrfVsF4ZaidX7NGqJZRtWvlFU80ziS1udmYy2OacuS6GMB817Q27_YisOyU2pz-Wdz89THYyJZJEui9Xx7VK4RTnghBzaA9NDFvNg5hJYhMQw5EO0kvrI");'
+                id="userProfilePic"
+                style='background-image: url("https://via.placeholder.com/128/cccccc/808080?text=User");'
               ></div>
-              <div class="flex flex-col items-center justify-center justify-center">
-                <p class="text-[#111518] text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">Chiara Rossi</p>
-                <p class="text-[#60768a] text-base font-normal leading-normal text-center">chiara.rossi@email.com</p>
+              <div class="flex flex-col items-center justify-center">
+                <p id="userFullName" class="text-[#111518] text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">Nome Utente</p>
+                <p id="userEmail" class="text-[#60768a] text-base font-normal leading-normal text-center">email@example.com</p>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Gestisci Section -->
         <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Gestisci</h3>
-        <div class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between">
-          <div class="flex items-center gap-4">
-            <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10" data-icon="Calendar" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z"
-                ></path>
-              </svg>
-            </div>
-            <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">Prenotazioni</p>
-          </div>
-          <div class="shrink-0">
-            <div class="text-[#111518] flex size-7 items-center justify-center" data-icon="ArrowRight" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-              </svg>
-            </div>
-          </div>
+        <div id="manageSection">
+            <a href="#myBookingsSection" class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between border-b"> <!-- MODIFIED href -->
+              <div class="flex items-center gap-4">
+                <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10" data-icon="Calendar" data-size="24px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path></svg>
+                </div>
+                <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">Le Mie Prenotazioni</p> <!-- MODIFIED Text -->
+              </div>
+              <div class="shrink-0 text-[#111518]"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg></div>
+            </a>
+            <!-- MODIFIED: Changed div to a, added href -->
+            <a href="#petManagementSection" id="myPetsLink" class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between border-b cursor-pointer">
+              <div class="flex items-center gap-4">
+                  <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10" data-icon="PawPrint" data-size="24px"> 
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a80.06,80.06,0,0,0-80-80,79,79,0,0,0-67.87,39.09,80,80,0,1,0-1.73,81.82,79,79,0,0,0,67.87,39.09,80,80,0,0,0,81.73-80Zm-80,64a64,64,0,1,1,64-64A64.07,64.07,0,0,1,144,192Z"></path></svg> 
+                  </div>
+                  <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">I Miei Animali</p>
+              </div>
+              <div class="shrink-0 text-[#111518]"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg></div>
+            </a>
+            <a href="#" class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between"> <!-- This "Informazioni Personali" link can be kept as is or made an anchor too if that section exists -->
+              <div class="flex items-center gap-4">
+                <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10" data-icon="User" data-size="24px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
+                </div>
+                <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">Informazioni personali</p>
+              </div>
+              <div class="shrink-0 text-[#111518]"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg></div>
+            </a>
         </div>
-        <div class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between">
-          <div class="flex items-center gap-4">
-            <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10" data-icon="User" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"
-                ></path>
-              </svg>
+
+        <!-- Pet Management Section Content -->
+        <div id="petManagementSection" class="px-4 pt-4">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">I Miei Animali</h3>
+                <button id="addPetButton" class="bg-[#0b80ee] text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-[#0a73d6]">Aggiungi Animale</button>
             </div>
-            <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">Informazioni personali</p>
-          </div>
-          <div class="shrink-0">
-            <div class="text-[#111518] flex size-7 items-center justify-center" data-icon="ArrowRight" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-              </svg>
+            <div id="petsList" class="space-y-3">
+                <!-- Pet items will be dynamically inserted here -->
             </div>
-          </div>
+            <p id="noPetsMessage" class="text-center text-gray-500 py-4" style="display: none;">Non hai ancora aggiunto nessun animale.</p>
         </div>
-        <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Impostazioni</h3>
-        <div class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between">
-          <div class="flex items-center gap-4">
-            <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10" data-icon="Bell" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
-                ></path>
-              </svg>
+
+        <!-- My Bookings Section -->
+        <div id="myBookingsSection" class="px-4 pt-6" style="scroll-margin-top: 60px;"> <!-- Added scroll-margin-top and adjusted pt -->
+            <h3 class="text-xl font-bold text-[#111518] mb-4">Le Mie Prenotazioni</h3>
+            <div id="bookingsList" class="space-y-4">
+                <!-- Booking items will be dynamically inserted here by JavaScript -->
             </div>
-            <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">Notifiche</p>
-          </div>
-          <div class="shrink-0">
-            <div class="text-[#111518] flex size-7 items-center justify-center" data-icon="ArrowRight" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-              </svg>
-            </div>
-          </div>
+            <p id="noBookingsMessage" class="text-center text-gray-500 py-4" style="display: none;">Non hai ancora nessuna prenotazione.</p>
         </div>
-        <div class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between">
-          <div class="flex items-center gap-4">
-            <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10" data-icon="Globe" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM101.63,168h52.74C149,186.34,140,202.87,128,215.89,116,202.87,107,186.34,101.63,168ZM98,152a145.72,145.72,0,0,1,0-48h60a145.72,145.72,0,0,1,0,48ZM40,128a87.61,87.61,0,0,1,3.33-24H81.79a161.79,161.79,0,0,0,0,48H43.33A87.61,87.61,0,0,1,40,128ZM154.37,88H101.63C107,69.66,116,53.13,128,40.11,140,53.13,149,69.66,154.37,88Zm19.84,16h38.46a88.15,88.15,0,0,1,0,48H174.21a161.79,161.79,0,0,0,0-48Zm32.16-16H170.94a142.39,142.39,0,0,0-20.26-45A88.37,88.37,0,0,1,206.37,88ZM105.32,43A142.39,142.39,0,0,0,85.06,88H49.63A88.37,88.37,0,0,1,105.32,43ZM49.63,168H85.06a142.39,142.39,0,0,0,20.26,45A88.37,88.37,0,0,1,49.63,168Zm101.05,45a142.39,142.39,0,0,0,20.26-45h35.43A88.37,88.37,0,0,1,150.68,213Z"
-                ></path>
-              </svg>
+
+        <!-- Impostazioni Section -->
+        <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6">Impostazioni</h3>
+        <div class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between border-b">
+            <div class="flex items-center gap-4">
+                <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path></svg>
+                </div>
+                <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">Notifiche</p>
             </div>
-            <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">Lingua</p>
-          </div>
-          <div class="shrink-0"><p class="text-[#111518] text-base font-normal leading-normal">Italiano</p></div>
+            <div class="shrink-0 text-[#111518]"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg></div>
         </div>
+        <!-- ... other settings items ... -->
         <div class="flex items-center gap-4 bg-white px-4 min-h-14 justify-between">
-          <div class="flex items-center gap-4">
-            <div class="text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f2f5] shrink-0 size-10" data-icon="Question" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"
-                ></path>
-              </svg>
+            <div class="flex items-center gap-4">
+                <button id="logoutButton" class="w-full text-left text-red-500 hover:text-red-700 py-2">
+                    Esci (Logout)
+                </button>
             </div>
-            <p class="text-[#111518] text-base font-normal leading-normal flex-1 truncate">Aiuto</p>
-          </div>
-          <div class="shrink-0">
-            <div class="text-[#111518] flex size-7 items-center justify-center" data-icon="ArrowRight" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-              </svg>
-            </div>
-          </div>
         </div>
       </div>
-      <div>
+
+      <!-- Bottom Navigation -->
+      <div class="sticky bottom-0 w-full">
         <div class="flex gap-2 border-t border-[#f0f2f5] bg-white px-4 pb-3 pt-2">
-          <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60768a]" href="#">
-            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"
-                ></path>
-              </svg>
-            </div>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-[#60768a]" href="home.html">
+            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="House" data-size="24px"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path></svg></div>
             <p class="text-[#60768a] text-xs font-medium leading-normal tracking-[0.015em]">Home</p>
           </a>
-          <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60768a]" href="#">
-            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-              </svg>
-            </div>
-            <p class="text-[#60768a] text-xs font-medium leading-normal tracking-[0.015em]">Cerca</p>
+          <a class="flex flex-1 flex-col items-center justify-center gap-1 text-[#60768a] p-2 rounded-lg" href="#"> <!-- Assuming Cerca is not yet implemented -->
+            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="MagnifyingGlass" data-size="24px"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg></div>
+            <p class="text-xs font-medium">Cerca</p>
           </a>
-          <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60768a]" href="#">
-            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="Calendar" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z"
-                ></path>
-              </svg>
-            </div>
-            <p class="text-[#60768a] text-xs font-medium leading-normal tracking-[0.015em]">Prenotazioni</p>
+          <a class="flex flex-1 flex-col items-center justify-center gap-1 text-[#60768a] p-2 rounded-lg" href="#myBookingsSection"> <!-- MODIFIED Link -->
+            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="Calendar" data-size="24px"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path></svg></div>
+            <p class="text-xs font-medium">Prenotazioni</p>
           </a>
-          <a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-[#111518]" href="#">
-            <div class="text-[#111518] flex h-8 items-center justify-center" data-icon="User" data-size="24px" data-weight="fill">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M230.93,220a8,8,0,0,1-6.93,4H32a8,8,0,0,1-6.92-12c15.23-26.33,38.7-45.21,66.09-54.16a72,72,0,1,1,73.66,0c27.39,8.95,50.86,27.83,66.09,54.16A8,8,0,0,1,230.93,220Z"
-                ></path>
-              </svg>
-            </div>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-[#111518]" href="profilo.html">
+            <div class="text-[#111518] flex h-8 items-center justify-center" data-icon="User" data-size="24px" data-weight="fill"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M230.93,220a8,8,0,0,1-6.93,4H32a8,8,0,0,1-6.92-12c15.23-26.33,38.7-45.21,66.09-54.16a72,72,0,1,1,73.66,0c27.39,8.95,50.86,27.83,66.09,54.16A8,8,0,0,1,230.93,220Z"></path></svg></div>
             <p class="text-[#111518] text-xs font-medium leading-normal tracking-[0.015em]">Profilo</p>
           </a>
         </div>
         <div class="h-5 bg-white"></div>
       </div>
     </div>
-  </body>
+
+    <!-- Add/Edit Pet Modal -->
+    <div id="petModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closePetModal">&times;</span>
+            <h3 id="modalTitle" class="text-lg font-bold mb-4">Aggiungi Animale</h3>
+            <form id="petForm">
+                <input type="hidden" id="petId" name="pet_id">
+                <div class="mb-4">
+                    <label for="petName" class="block text-sm font-medium text-gray-700">Nome</label>
+                    <input type="text" id="petName" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0b80ee] focus:border-[#0b80ee] sm:text-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="petBreed" class="block text-sm font-medium text-gray-700">Razza</label>
+                    <input type="text" id="petBreed" name="breed" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0b80ee] focus:border-[#0b80ee] sm:text-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="petAge" class="block text-sm font-medium text-gray-700">Età</label>
+                    <input type="number" id="petAge" name="age" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0b80ee] focus:border-[#0b80ee] sm:text-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="petNotes" class="block text-sm font-medium text-gray-700">Note</label>
+                    <textarea id="petNotes" name="notes" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0b80ee] focus:border-[#0b80ee] sm:text-sm"></textarea>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelPetForm" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md text-sm font-medium">Annulla</button>
+                    <button type="submit" class="bg-[#0b80ee] hover:bg-[#0a73d6] text-white px-4 py-2 rounded-md text-sm font-medium">Salva</button>
+                </div>
+                <p id="petFormError" class="mt-3 text-sm text-red-600"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addPetButton = document.getElementById('addPetButton');
+            const petModal = document.getElementById('petModal');
+            const closePetModalButton = document.getElementById('closePetModal');
+            const cancelPetFormButton = document.getElementById('cancelPetForm');
+            const petForm = document.getElementById('petForm');
+            const modalTitle = document.getElementById('modalTitle');
+            const petsListContainer = document.getElementById('petsList');
+            const noPetsMessage = document.getElementById('noPetsMessage');
+            const petFormError = document.getElementById('petFormError');
+            
+            const userFullNameEl = document.getElementById('userFullName');
+            const userEmailEl = document.getElementById('userEmail');
+            const logoutButton = document.getElementById('logoutButton');
+
+            // --- User Info and Auth Check ---
+            async function fetchUserInfo() {
+                try {
+                    const response = await fetch('/api/pets'); 
+                    if (response.ok) {
+                        userFullNameEl.textContent = sessionStorage.getItem('user_full_name') || 'Utente';
+                        userEmailEl.textContent = sessionStorage.getItem('user_email') || 'utente@example.com';
+                        fetchPets(); 
+                    } else if (response.status === 401) {
+                        window.location.href = 'accedi.html';
+                    } else {
+                        console.error('Error checking auth status:', response.statusText);
+                        document.getElementById('petManagementSection').style.display = 'none';
+                    }
+                } catch (error) {
+                    console.error('Error fetching user info:', error);
+                }
+            }
+
+            // --- Pet Management ---
+            const openModalForAdd = () => {
+                petForm.reset();
+                document.getElementById('petId').value = '';
+                modalTitle.textContent = 'Aggiungi Animale';
+                petModal.style.display = 'block';
+                petFormError.textContent = '';
+            };
+
+            const openModalForEdit = (pet) => {
+                petForm.reset();
+                document.getElementById('petId').value = pet.id;
+                document.getElementById('petName').value = pet.name;
+                document.getElementById('petBreed').value = pet.breed || '';
+                document.getElementById('petAge').value = pet.age || '';
+                document.getElementById('petNotes').value = pet.notes || '';
+                modalTitle.textContent = 'Modifica Animale';
+                petModal.style.display = 'block';
+                petFormError.textContent = '';
+            };
+
+            const closeModal = () => {
+                petModal.style.display = 'none';
+                petFormError.textContent = '';
+            };
+
+            if(addPetButton) addPetButton.addEventListener('click', openModalForAdd);
+            if(closePetModalButton) closePetModalButton.addEventListener('click', closeModal);
+            if(cancelPetFormButton) cancelPetFormButton.addEventListener('click', closeModal);
+            
+            window.addEventListener('click', (event) => { 
+                if (event.target == petModal) {
+                    closeModal();
+                }
+            });
+
+            async function fetchPets() {
+                try {
+                    const response = await fetch('/api/pets');
+                    if (!response.ok) {
+                        if (response.status === 401) window.location.href = 'accedi.html';
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const pets = await response.json();
+                    renderPets(pets);
+                } catch (error) {
+                    console.error("Could not fetch pets:", error);
+                    if(petsListContainer) petsListContainer.innerHTML = '<p class="text-red-500">Errore nel caricare gli animali.</p>';
+                }
+            }
+
+            function renderPets(pets) {
+                if (!petsListContainer || !noPetsMessage) return;
+                petsListContainer.innerHTML = ''; 
+                if (pets.length === 0) {
+                    noPetsMessage.style.display = 'block';
+                } else {
+                    noPetsMessage.style.display = 'none';
+                    pets.forEach(pet => {
+                        const petDiv = document.createElement('div');
+                        petDiv.className = 'bg-white p-4 rounded-lg shadow flex justify-between items-center';
+                        petDiv.innerHTML = `
+                            <div>
+                                <p class="text-md font-semibold text-[#111518]">${pet.name}</p>
+                                <p class="text-sm text-gray-600">${pet.breed || 'Razza non specificata'}, ${pet.age !== null ? pet.age + ' anni' : 'Età non specificata'}</p>
+                                <p class="text-xs text-gray-500 mt-1">Note: ${pet.notes || '-'}</p>
+                            </div>
+                            <div class="space-x-2 flex-shrink-0">
+                                <button data-pet-id="${pet.id}" class="edit-pet-button text-blue-500 hover:text-blue-700 text-sm">Modifica</button>
+                                <button data-pet-id="${pet.id}" class="delete-pet-button text-red-500 hover:text-red-700 text-sm">Elimina</button>
+                            </div>
+                        `;
+                        petsListContainer.appendChild(petDiv);
+
+                        petDiv.querySelector('.edit-pet-button').addEventListener('click', () => openModalForEdit(pet));
+                        petDiv.querySelector('.delete-pet-button').addEventListener('click', () => deletePet(pet.id, pet.name));
+                    });
+                }
+            }
+
+            if(petForm) petForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                petFormError.textContent = '';
+
+                const petId = document.getElementById('petId').value;
+                const petData = {
+                    name: document.getElementById('petName').value,
+                    breed: document.getElementById('petBreed').value,
+                    age: document.getElementById('petAge').value ? parseInt(document.getElementById('petAge').value) : null,
+                    notes: document.getElementById('petNotes').value,
+                };
+
+                const url = petId ? `/api/pets/${petId}` : '/api/pets';
+                const method = petId ? 'PUT' : 'POST';
+                const submitButton = petForm.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.textContent;
+                
+                submitButton.disabled = true;
+                submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+                submitButton.textContent = 'Salvataggio...';
+
+                try {
+                    const response = await fetch(url, {
+                        method: method,
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(petData),
+                    });
+                    const result = await response.json();
+                    if (!response.ok) {
+                        petFormError.textContent = result.error || `Error: ${response.statusText}`;
+                        throw new Error(result.error || `Failed to save pet. Status: ${response.status}`);
+                    }
+                    closeModal();
+                    fetchPets(); 
+                    alert(result.message || 'Animale salvato con successo!');
+                } catch (error) {
+                    console.error("Error saving pet:", error);
+                    petFormError.textContent = error.message || "Un errore è avvenuto durante il salvataggio.";
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    submitButton.textContent = originalButtonText;
+                }
+            });
+
+            async function deletePet(petId, petName) {
+                if (!confirm(`Sei sicuro di voler eliminare ${petName}?`)) {
+                    return;
+                }
+                try {
+                    const response = await fetch(`/api/pets/${petId}`, { method: 'DELETE' });
+                    const result = await response.json();
+                    if (!response.ok) {
+                         throw new Error(result.error || `Failed to delete pet. Status: ${response.status}`);
+                    }
+                    fetchPets(); 
+                    alert(result.message || 'Animale eliminato con successo!');
+                } catch (error) {
+                    console.error("Error deleting pet:", error);
+                    alert(`Errore durante l'eliminazione: ${error.message}`);
+                }
+            }
+            
+            if(logoutButton) logoutButton.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/api/logout', { method: 'POST' });
+                    if (response.ok) {
+                        sessionStorage.clear(); 
+                        window.location.href = 'accedi.html';
+                    } else {
+                        alert('Logout fallito. Riprova.');
+                    }
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('Errore durante il logout.');
+                }
+            });
+
+            // Initial fetch
+            fetchUserInfo();
+            fetchUserBookings(); // Fetch bookings on page load
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start' 
+                        });
+                    }
+                });
+            });
+        });
+
+        // --- My Bookings Section ---
+        const bookingsListContainer = document.getElementById('bookingsList');
+        const noBookingsMessageEl = document.getElementById('noBookingsMessage'); 
+
+        async function fetchUserBookings() {
+            if (!bookingsListContainer || !noBookingsMessageEl) {
+                // console.warn('Bookings list container or no bookings message element not found.');
+                return; 
+            }
+
+            try {
+                const response = await fetch('/api/bookings'); 
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        const myBookingsSection = document.getElementById('myBookingsSection');
+                        if(myBookingsSection) myBookingsSection.innerHTML = '<p class="text-center text-gray-500 py-4">Devi effettuare il login per vedere le tue prenotazioni. <a href="accedi.html" class="text-[#0b80ee] hover:underline">Accedi ora</a>.</p>';
+                        return;
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const bookings = await response.json();
+                renderUserBookings(bookings);
+            } catch (error) {
+                // console.error("Could not fetch user bookings:", error);
+                bookingsListContainer.innerHTML = '<p class="text-red-500 text-center">Errore nel caricare le prenotazioni.</p>';
+                noBookingsMessageEl.style.display = 'none';
+            }
+        }
+
+        function renderUserBookings(bookings) {
+            bookingsListContainer.innerHTML = ''; 
+            if (bookings.length === 0) {
+                noBookingsMessageEl.style.display = 'block';
+            } else {
+                noBookingsMessageEl.style.display = 'none';
+                const now = new Date();
+                
+                const upcomingBookings = bookings.filter(b => new Date(b.appointment_time) >= now);
+                const pastBookings = bookings.filter(b => new Date(b.appointment_time) < now);
+
+                if (upcomingBookings.length > 0) {
+                    bookingsListContainer.appendChild(createBookingSectionTitle('Prenotazioni Future'));
+                    upcomingBookings.sort((a,b) => new Date(a.appointment_time) - new Date(b.appointment_time));
+                    upcomingBookings.forEach(booking => bookingsListContainer.appendChild(createBookingCard(booking)));
+                }
+
+                if (pastBookings.length > 0) {
+                    bookingsListContainer.appendChild(createBookingSectionTitle('Prenotazioni Passate'));
+                    pastBookings.sort((a,b) => new Date(b.appointment_time) - new Date(a.appointment_time)); 
+                    pastBookings.forEach(booking => bookingsListContainer.appendChild(createBookingCard(booking)));
+                }
+                
+                if (upcomingBookings.length === 0 && pastBookings.length === 0 && bookings.length > 0) {
+                     bookings.forEach(booking => bookingsListContainer.appendChild(createBookingCard(booking)));
+                 } else if (bookings.length === 0) { // This condition is already handled by the first if
+                    noBookingsMessageEl.style.display = 'block';
+                 }
+            }
+        }
+        
+        function createBookingSectionTitle(title) {
+            const titleEl = document.createElement('h4');
+            titleEl.className = 'text-xl font-semibold text-gray-800 mt-6 mb-3';
+            titleEl.textContent = title;
+            return titleEl;
+        }
+
+        function createBookingCard(booking) {
+            const card = document.createElement('div');
+            card.className = 'bg-white p-4 rounded-lg shadow-md mb-4 border border-gray-200';
+            
+            const appointmentDate = new Date(booking.appointment_time);
+            const formattedDate = appointmentDate.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+            const formattedTime = appointmentDate.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+
+            let statusText = booking.status;
+            let statusClass = 'text-gray-700'; 
+            if (booking.status === 'booked') {
+                if (new Date(booking.appointment_time) >= new Date()) {
+                    statusText = 'Confermata';
+                    statusClass = 'text-green-600 font-semibold';
+                } else {
+                    statusText = 'Completata'; 
+                    statusClass = 'text-blue-600 font-semibold';
+                }
+            } else if (booking.status === 'cancelled') { 
+                statusText = 'Annullata';
+                statusClass = 'text-red-600 font-semibold';
+            }
+
+            card.innerHTML = \`
+                <h5 class="text-lg font-semibold text-[#0b80ee] mb-1">\${booking.service_name}</h5>
+                <p class="text-sm text-gray-800">Animale: <span class="font-medium">\${booking.pet_name} (\${booking.pet_breed || 'N/A'})</span></p>
+                <p class="text-sm text-gray-600">Data: <span class="font-medium">\${formattedDate}</span> alle <span class="font-medium">\${formattedTime}</span></p>
+                <p class="text-sm text-gray-600">Durata: \${booking.service_duration} minuti</p>
+                <p class="text-sm text-gray-600">Prezzo: €\${booking.service_price.toFixed(2)}</p>
+                <p class="text-sm capitalize mt-1">Stato: <span class="\${statusClass}">\${statusText}</span></p>
+                \${ (booking.status === 'booked' && new Date(booking.appointment_time) > new Date()) ? 
+                    \`<button data-booking-id="\${booking.id}" class="cancel-booking-button mt-3 text-xs text-red-500 hover:text-red-700 focus:outline-none">Annulla Prenotazione (NON IMPLEMENTATO)</button>\` : '' }
+            \`;
+            return card;
+        }
+    </script>
+</body>
 </html>

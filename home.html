@@ -1,5 +1,10 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Toelettatura Zampa Felice</title>
+    <!-- Favicon removed as per instruction -->
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link
       rel="stylesheet"
@@ -7,131 +12,150 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
     />
-
-    <title>Stitch Design</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
-  <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-white justify-between group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+    <style>
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111518;
+        }
+        .service-card p {
+            color: #374151; /* Tailwind gray-700 */
+            margin-top: 0.5rem;
+        }
+        .service-card .price-duration {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #4B5563; /* Tailwind gray-600 */
+        }
+        .book-now-button {
+            background-color: #0b80ee;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* full */
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .book-now-button:hover {
+            background-color: #0a73d6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+    <div class="relative flex size-full min-h-screen flex-col justify-between group/design-root overflow-x-hidden">
       <div>
-        <div class="flex items-center bg-white p-4 pb-2 justify-between">
-          <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pl-12">Accademia de'I Musici</h2>
-          <div class="flex w-12 items-center justify-end">
-            <button
-              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 bg-transparent text-[#111518] gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0"
-            >
-              <div class="text-[#111518]" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                  <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-                </svg>
-              </div>
-            </button>
-          </div>
+        <!-- Header -->
+        <div class="flex items-center bg-white p-4 pb-2 justify-between shadow-sm">
+          <h1 class="text-[#111518] text-xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+            Servizi di Toelettatura
+          </h1>
+          <!-- Removed search icon, can be added back if needed -->
         </div>
-        <div class="pb-3">
-          <div class="flex border-b border-[#dbe1e6] px-4 gap-8">
-            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-[#111518] text-[#111518] pb-[13px] pt-4" href="#">
-              <p class="text-[#111518] text-sm font-bold leading-normal tracking-[0.015em]">Lezioni</p>
-            </a>
-            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#60768a] pb-[13px] pt-4" href="#">
-              <p class="text-[#60768a] text-sm font-bold leading-normal tracking-[0.015em]">Eventi</p>
-            </a>
-            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#60768a] pb-[13px] pt-4" href="#">
-              <p class="text-[#60768a] text-sm font-bold leading-normal tracking-[0.015em]">Appuntamenti</p>
-            </a>
-          </div>
-        </div>
-        <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Lezioni</h3>
-        <div class="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
-          <div class="flex items-stretch p-4 gap-3">
-            <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
-              <div
-                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex flex-col"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDind0rHURPeX9fG5pQdfrEygAiAEf-5TkcZrBIpKw-MMv5byZ569AYy5cTnzSB2odOdz_nV7ctcY2U9xRQfpLpYQ1VE5LClfAau4JlpMSDVykqu6ntv-4HeyYAxy1LOE32AtftGYw4NJ-v5DrxhwzSWMoTlF6c-ZVv92VOKzGMoMsIUbVm6qLMLQUG-RupeURAzozwL1hQPo00a32BwqfnUWyfaBMnV7Vw7myVPkhUw35ryrHaTP_z2smPyfjQWBbGn0NAHCticwU");'
-              ></div>
-              <div>
-                <p class="text-[#111518] text-base font-medium leading-normal">Lezione di pianoforte</p>
-                <p class="text-[#60768a] text-sm font-normal leading-normal">Impara a suonare il pianoforte con i nostri insegnanti esperti</p>
-              </div>
+
+        <!-- Main Content Area -->
+        <div class="p-4">
+            <h2 class="text-[#111518] text-2xl font-bold leading-tight tracking-[-0.015em] mb-6 text-center">
+                I Nostri Servizi
+            </h2>
+            <div id="servicesListContainer" class="space-y-4">
+                <!-- Services will be dynamically inserted here by JavaScript -->
             </div>
-          </div>
-        </div>
-        <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Eventi</h3>
-        <div class="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
-          <div class="flex items-stretch p-4 gap-3">
-            <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
-              <div
-                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex flex-col"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB7V67g6bx0Jj27Ka5bOV7e0nWZp5tN0jw5QBYJVwbNq_aASt814-RvWjQcdUjuqr5gzq4c2RWbBIntQN7C1QOfGYNPnwBYLHi_aPCAyq7MsT4dlkPvHlOAnekGJudtaqzXra8il56GMGDQeNKcrjoVtihnY0qhtuwUnjbTjNMCKZ7vsshWxW6_eEklEeRayN3o8d436u18Qij12Ep55Gc7xOkRaOdysrCTE7QB4u0laQUT1evZy9kap1pCqP3ce8QLpnJKdmFMSMQ");'
-              ></div>
-              <div>
-                <p class="text-[#111518] text-base font-medium leading-normal">Concerto di musica classica</p>
-                <p class="text-[#60768a] text-sm font-normal leading-normal">Assisti a un concerto di musica classica con i nostri studenti</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Appuntamenti</h3>
-        <div class="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
-          <div class="flex items-stretch p-4 gap-3">
-            <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
-              <div
-                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex flex-col"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDiLsdel6IepZnl2LLwP46ql7YnvZMqlmM-0-bZOCqp8OnHHL9iP6MIMv6udZ54oKsgBZE3DiGguD0_goAESf6h4jR9Q4rtI6hFmWwFZkEzo9ONBA-YOC_SToYVWBB0wssfYsrg9EE5ru8qLwUOe4mxrnE2tWdJpKW2axuRitsxBpBgTJRgtWrNTrcmBBQt-nAp8m7MJ3u1DgZaRayx1k6GUc3Y9nu2STHhFSBfbO2thqxKyiTv5jscbyvAriMBeUvbZB_eHn4XfiM");'
-              ></div>
-              <div>
-                <p class="text-[#111518] text-base font-medium leading-normal">Consulenza musicale</p>
-                <p class="text-[#60768a] text-sm font-normal leading-normal">Prenota una consulenza musicale con i nostri esperti</p>
-              </div>
-            </div>
-          </div>
+            <p id="servicesError" class="text-center text-red-500 mt-4" style="display: none;">
+                Impossibile caricare i servizi al momento. Riprova più tardi.
+            </p>
         </div>
       </div>
-      <div>
-        <div class="flex gap-2 border-t border-[#f0f2f5] bg-white px-4 pb-3 pt-2">
-          <a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-[#111518]" href="#">
-            <div class="text-[#111518] flex h-8 items-center justify-center" data-icon="House" data-size="24px" data-weight="fill">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z"
-                ></path>
-              </svg>
+
+      <!-- Bottom Navigation -->
+      <div class="sticky bottom-0 w-full bg-white border-t border-[#f0f2f5]">
+        <div class="flex justify-around items-center px-2 py-2">
+          <a class="flex flex-1 flex-col items-center justify-center gap-1 text-[#111518] p-2 rounded-lg" href="home.html">
+            <div class="text-[#111518]" data-icon="House" data-size="24px" data-weight="fill"> <!-- Home is active -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z"></path></svg>
             </div>
-            <p class="text-[#111518] text-xs font-medium leading-normal tracking-[0.015em]">Home</p>
+            <p class="text-[#111518] text-xs font-medium leading-normal">Home</p>
           </a>
-          <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60768a]" href="#">
-            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-              </svg>
+          <a class="flex flex-1 flex-col items-center justify-center gap-1 text-[#60768a] p-2 rounded-lg" href="profilo.html#myBookingsSection"> <!-- MODIFIED Link -->
+            <div class="text-[#60768a]" data-icon="Calendar" data-size="24px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path></svg>
             </div>
-            <p class="text-[#60768a] text-xs font-medium leading-normal tracking-[0.015em]">Cerca</p>
+            <p class="text-[#60768a] text-xs font-medium leading-normal">Prenotazioni</p>
           </a>
-          <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60768a]" href="#">
-            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="Calendar" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z"
-                ></path>
-              </svg>
+          <a class="flex flex-1 flex-col items-center justify-center gap-1 text-[#60768a] p-2 rounded-lg" href="profilo.html">
+            <div class="text-[#60768a]" data-icon="User" data-size="24px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
             </div>
-            <p class="text-[#60768a] text-xs font-medium leading-normal tracking-[0.015em]">Prenotazioni</p>
-          </a>
-          <a class="just flex flex-1 flex-col items-center justify-end gap-1 text-[#60768a]" href="#">
-            <div class="text-[#60768a] flex h-8 items-center justify-center" data-icon="User" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"
-                ></path>
-              </svg>
-            </div>
-            <p class="text-[#60768a] text-xs font-medium leading-normal tracking-[0.015em]">Profilo</p>
+            <p class="text-[#60768a] text-xs font-medium leading-normal">Profilo</p>
           </a>
         </div>
-        <div class="h-5 bg-white"></div>
       </div>
     </div>
-  </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const servicesListContainer = document.getElementById('servicesListContainer');
+            const servicesError = document.getElementById('servicesError');
+
+            async function fetchServices() {
+                try {
+                    const response = await fetch('/api/services');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const services = await response.json();
+                    renderServices(services);
+                } catch (error) {
+                    console.error("Could not fetch services:", error);
+                    servicesError.textContent = 'Impossibile caricare i servizi al momento. Riprova più tardi.';
+                    servicesError.style.display = 'block';
+                    servicesListContainer.innerHTML = ''; // Clear any partial content
+                }
+            }
+
+            function renderServices(services) {
+                servicesListContainer.innerHTML = ''; // Clear existing list or placeholders
+                if (!services || services.length === 0) {
+                    servicesError.textContent = 'Nessun servizio disponibile al momento.';
+                    servicesError.style.display = 'block';
+                    return;
+                }
+
+                servicesError.style.display = 'none';
+                services.forEach(service => {
+                    const serviceCard = document.createElement('div');
+                    serviceCard.className = 'service-card';
+                    
+                    serviceCard.innerHTML = `
+                        <h3>${service.name}</h3>
+                        <p>${service.description}</p>
+                        <div class="price-duration">
+                            <span>Durata: ${service.duration_minutes} min</span>
+                            <span>Prezzo: €${service.price.toFixed(2)}</span>
+                        </div>
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <a href="dettagli.html?service_id=${service.id}" class="book-now-button">
+                                Prenota Ora
+                            </a>
+                        </div>
+                    `;
+                    servicesListContainer.appendChild(serviceCard);
+                });
+            }
+
+            // Initial fetch of services
+            fetchServices();
+        });
+    </script>
+</body>
 </html>

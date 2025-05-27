@@ -1,86 +1,337 @@
-<html>
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prenota Servizio - Toelettatura Zampa Felice</title>
+    <!-- Favicon removed as per instruction -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link
       rel="stylesheet"
       as="style"
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
     />
-
-    <title>Stitch Design</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
-  <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-white justify-between group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
-      <div>
-        <div class="flex items-center bg-white p-4 pb-2 justify-between">
-          <div class="text-[#111518] flex size-12 shrink-0 items-center" data-icon="ArrowLeft" data-size="24px" data-weight="regular">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
-            </svg>
-          </div>
-          <h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Dettagli</h2>
+    <style>
+        .time-slot-button {
+            background-color: #e0e7ff; /* Indigo 100 */
+            color: #3730a3; /* Indigo 800 */
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem; /* md */
+            border: 1px solid #c7d2fe; /* Indigo 300 */
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .time-slot-button:hover, .time-slot-button.selected {
+            background-color: #0b80ee; /* Primary blue */
+            color: white;
+        }
+        .disabled-button {
+            background-color: #d1d5db; /* gray-300 */
+            color: #6b7280; /* gray-500 */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-100" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+    <div class="relative flex size-full min-h-screen flex-col justify-between group/design-root overflow-x-hidden">
+        <div>
+            <!-- Header -->
+            <div class="flex items-center bg-white p-4 pb-2 justify-between shadow-sm">
+                <a href="home.html" class="text-[#111518] flex size-12 shrink-0 items-center" aria-label="Back to Home">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                        <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+                    </svg>
+                </a>
+                <h1 class="text-[#111518] text-xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
+                    Prenota Servizio
+                </h1>
+            </div>
+
+            <!-- Booking Form Area -->
+            <div class="p-4">
+                <div id="serviceDetailsContainer" class="bg-white p-6 rounded-lg shadow mb-6">
+                    <h2 id="serviceName" class="text-2xl font-bold text-[#111518] mb-2">Caricamento servizio...</h2>
+                    <p id="serviceDescription" class="text-gray-700 mb-1"></p>
+                    <p id="serviceDuration" class="text-gray-600 text-sm mb-1"></p>
+                    <p id="servicePrice" class="text-gray-600 text-sm"></p>
+                </div>
+
+                <div id="bookingFormContainer" style="display: none;">
+                    <form id="bookingForm" class="space-y-6">
+                        <div>
+                            <label for="petSelect" class="block text-sm font-medium text-gray-700 mb-1">Seleziona il tuo animale</label>
+                            <select id="petSelect" name="pet_id" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0b80ee] focus:border-[#0b80ee] sm:text-sm">
+                                <!-- Options will be populated by JS -->
+                            </select>
+                            <p id="noPetsMessage" class="text-sm text-gray-600 mt-1" style="display:none;">
+                                Non hai animali registrati. <a href="profilo.html#petManagementSection" class="text-[#0b80ee] hover:underline">Aggiungi un animale</a>.
+                            </p>
+                        </div>
+
+                        <div>
+                            <label for="bookingDate" class="block text-sm font-medium text-gray-700 mb-1">Seleziona Data</label>
+                            <input type="date" id="bookingDate" name="date" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#0b80ee] focus:border-[#0b80ee] sm:text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Seleziona Orario</label>
+                            <div id="timeSlotsContainer" class="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                                <!-- Time slots will be populated here -->
+                            </div>
+                            <p id="availabilityMessage" class="text-sm text-gray-600 mt-1"></p>
+                        </div>
+                        
+                        <input type="hidden" id="selectedTimeSlot" name="selected_time">
+
+                        <div>
+                            <button type="submit" id="confirmBookingButton" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-[#0b80ee] hover:bg-[#0a73d6] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0b80ee]">
+                                Conferma Prenotazione
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div id="authMessageContainer" class="text-center p-4 bg-yellow-100 border border-yellow-300 rounded-md" style="display: none;">
+                    <p>Devi effettuare il <a href="accedi.html" class="font-semibold text-[#0b80ee] hover:underline">login</a> per prenotare un servizio.</p>
+                </div>
+                <p id="bookingStatusMessage" class="mt-4 text-center text-sm"></p>
+            </div>
         </div>
-        <div class="@container">
-          <div class="@[480px]:px-4 @[480px]:py-3">
-            <div
-              class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-white @[480px]:rounded-xl min-h-[218px]"
-              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDsAfd4z19F7_kaK1uVl64IhbUDNar7peA9f_nNsptaaSSqOvG8VcSiW5FGgMJFIxKzJ96hnCYNXf9mCajHY7uohP60e3gvRYVf9rIKaWU01zKP0MAOrWV6uiFty7O_r6ZZ_V3o84i1EzKJzx9tjaN1vv8jOQD8wkR11K5yy_eHr0I4lxVFyKC1d7Fu12PDc9bIEv0DgjLfXote__XRoaHqs6iHGuj2XGr2EfH8ZhqJecTbLSp92Td1Q91Jb5lX6NSmI-FMYu0Omsw");'
-            ></div>
-          </div>
+
+        <!-- Bottom Navigation (consistent with home.html) -->
+        <div class="sticky bottom-0 w-full bg-white border-t border-[#f0f2f5]">
+            <div class="flex justify-around items-center px-2 py-2">
+                <a class="flex flex-1 flex-col items-center justify-center gap-1 text-[#60768a] p-2 rounded-lg" href="home.html">
+                    <div class="text-[#60768a]" data-icon="House"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path></svg></div>
+                    <p class="text-xs font-medium">Home</p>
+                </a>
+                <a class="flex flex-1 flex-col items-center justify-center gap-1 text-[#60768a] p-2 rounded-lg" href="profilo.html#myBookingsSection"> <!-- MODIFIED to be consistent -->
+                    <div class="text-[#60768a]" data-icon="Calendar" data-weight="regular"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path></svg></div>
+                    <p class="text-xs font-medium">Prenotazioni</p>
+                </a>
+                <a class="flex flex-1 flex-col items-center justify-center gap-1 text-[#60768a] p-2 rounded-lg" href="profilo.html">
+                    <div class="text-[#60768a]" data-icon="User"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg></div>
+                    <p class="text-xs font-medium">Profilo</p>
+                </a>
+            </div>
         </div>
-        <h1 class="text-[#111518] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-3 pt-5">Lezione di chitarra per principianti</h1>
-        <p class="text-[#111518] text-base font-normal leading-normal pb-3 pt-1 px-4">
-          Impara le basi della chitarra acustica con un istruttore esperto. Questa lezione copre la postura corretta, le tecniche di diteggiatura e gli accordi di base.
-        </p>
-        <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Informazioni</h3>
-        <div class="p-4 grid grid-cols-[20%_1fr] gap-x-6">
-          <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dbe1e6] py-5">
-            <p class="text-[#60768a] text-sm font-normal leading-normal">Data</p>
-            <p class="text-[#111518] text-sm font-normal leading-normal">Sabato, 15 luglio</p>
-          </div>
-          <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dbe1e6] py-5">
-            <p class="text-[#60768a] text-sm font-normal leading-normal">Ora</p>
-            <p class="text-[#111518] text-sm font-normal leading-normal">10:00 - 11:00</p>
-          </div>
-          <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dbe1e6] py-5">
-            <p class="text-[#60768a] text-sm font-normal leading-normal">Durata</p>
-            <p class="text-[#111518] text-sm font-normal leading-normal">1 ora</p>
-          </div>
-          <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dbe1e6] py-5">
-            <p class="text-[#60768a] text-sm font-normal leading-normal">Livello</p>
-            <p class="text-[#111518] text-sm font-normal leading-normal">Principiante</p>
-          </div>
-          <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dbe1e6] py-5">
-            <p class="text-[#60768a] text-sm font-normal leading-normal">Luogo</p>
-            <p class="text-[#111518] text-sm font-normal leading-normal">Accademia di Musica</p>
-          </div>
-        </div>
-        <h3 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Istruttore</h3>
-        <div class="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2">
-          <div
-            class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-14 w-fit"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzfgS5D4vEmY34N8QGGcCGKQre3VaXwetYMUTZuAZxcMHxbaQAZuc2slKz1ndVYKkbKzwIuLXxFq9iBmV6u9xqMA3VIaHKSk8_my7jcwQRqqki1JhryXHtzWLBGvA-T5AhNYnz-ODJ_X8w0aRGL467AyLFGu5zJCFoCJw7hIUEG8xm6lVbl2iMrCUlBxtv0rTuhI6wo5vRIf51IEBlUotVeSAm7YGrdjlhIWhVW3L1ytfSZ-iPNo6GAmvcYR5rTV4US8fDN015kcA");'
-          ></div>
-          <div class="flex flex-col justify-center">
-            <p class="text-[#111518] text-base font-medium leading-normal line-clamp-1">Marco Rossi</p>
-            <p class="text-[#60768a] text-sm font-normal leading-normal line-clamp-2">Istruttore di chitarra</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="flex px-4 py-3">
-          <button
-            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#0b80ee] text-white text-base font-bold leading-normal tracking-[0.015em]"
-          >
-            <span class="truncate">Prenota</span>
-          </button>
-        </div>
-        <div class="h-5 bg-white"></div>
-      </div>
     </div>
-  </body>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const serviceNameEl = document.getElementById('serviceName');
+        const serviceDescriptionEl = document.getElementById('serviceDescription');
+        const serviceDurationEl = document.getElementById('serviceDuration');
+        const servicePriceEl = document.getElementById('servicePrice');
+        const petSelectEl = document.getElementById('petSelect');
+        const noPetsMessageEl = document.getElementById('noPetsMessage');
+        const bookingDateInput = document.getElementById('bookingDate');
+        const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+        const availabilityMessageEl = document.getElementById('availabilityMessage');
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingStatusMessageEl = document.getElementById('bookingStatusMessage');
+        const confirmBookingButton = document.getElementById('confirmBookingButton');
+        const bookingFormContainer = document.getElementById('bookingFormContainer');
+        const authMessageContainer = document.getElementById('authMessageContainer');
+        const selectedTimeSlotInput = document.getElementById('selectedTimeSlot');
+
+        let serviceId = null;
+        let currentServiceDuration = 0; // Store duration of the current service
+
+        async function initializePage() {
+            const params = new URLSearchParams(window.location.search);
+            serviceId = params.get('service_id');
+
+            if (!serviceId) {
+                serviceNameEl.textContent = "Servizio non specificato.";
+                return;
+            }
+
+            await fetchServiceDetails();
+            checkUserLoginAndLoadPets();
+        }
+
+        async function fetchServiceDetails() {
+            try {
+                const response = await fetch(`/api/services/${serviceId}`);
+                if (!response.ok) throw new Error('Servizio non trovato');
+                const service = await response.json();
+                
+                serviceNameEl.textContent = service.name;
+                serviceDescriptionEl.textContent = service.description;
+                serviceDurationEl.textContent = `Durata: ${service.duration_minutes} minuti`;
+                servicePriceEl.textContent = `Prezzo: €${service.price.toFixed(2)}`;
+                currentServiceDuration = service.duration_minutes;
+            } catch (error) {
+                serviceNameEl.textContent = error.message;
+                console.error("Error fetching service details:", error);
+            }
+        }
+
+        async function checkUserLoginAndLoadPets() {
+            try {
+                const response = await fetch('/api/pets'); // Test endpoint that requires login
+                if (response.ok) {
+                    authMessageContainer.style.display = 'none';
+                    bookingFormContainer.style.display = 'block';
+                    const pets = await response.json();
+                    populatePetSelector(pets);
+                } else if (response.status === 401) { // Unauthorized
+                    authMessageContainer.style.display = 'block';
+                    bookingFormContainer.style.display = 'none';
+                } else {
+                    throw new Error('Failed to check login status');
+                }
+            } catch (error) {
+                console.error('Error checking login status:', error);
+                authMessageContainer.textContent = 'Errore durante la verifica dell\'autenticazione. Riprova più tardi.';
+                authMessageContainer.style.display = 'block';
+                bookingFormContainer.style.display = 'none';
+            }
+        }
+
+        function populatePetSelector(pets) {
+            petSelectEl.innerHTML = ''; // Clear existing options
+            if (pets.length === 0) {
+                noPetsMessageEl.style.display = 'block';
+                petSelectEl.style.display = 'none';
+                confirmBookingButton.disabled = true;
+                confirmBookingButton.classList.add('disabled-button');
+            } else {
+                noPetsMessageEl.style.display = 'none';
+                petSelectEl.style.display = 'block';
+                pets.forEach(pet => {
+                    const option = document.createElement('option');
+                    option.value = pet.id;
+                    option.textContent = `${pet.name} (${pet.breed || 'Razza non specificata'})`;
+                    petSelectEl.appendChild(option);
+                });
+                confirmBookingButton.disabled = false;
+                confirmBookingButton.classList.remove('disabled-button');
+            }
+        }
+        
+        bookingDateInput.addEventListener('change', async () => {
+            const selectedDate = bookingDateInput.value;
+            if (!selectedDate || !serviceId) {
+                timeSlotsContainer.innerHTML = '';
+                availabilityMessageEl.textContent = 'Seleziona una data.';
+                return;
+            }
+            
+            // Set min date to today
+            const today = new Date().toISOString().split('T')[0];
+            if (selectedDate < today) {
+                timeSlotsContainer.innerHTML = '';
+                availabilityMessageEl.textContent = 'Non è possibile selezionare date passate.';
+                return;
+            }
+
+            try {
+                availabilityMessageEl.textContent = 'Sto cercando gli orari disponibili...';
+                timeSlotsContainer.innerHTML = '';
+                selectedTimeSlotInput.value = ''; // Clear selected time
+
+                const response = await fetch(`/api/availability?service_id=${serviceId}&date=${selectedDate}`);
+                if (!response.ok) throw new Error('Errore nel caricare la disponibilità.');
+                
+                const data = await response.json();
+                if (data.available_slots && data.available_slots.length > 0) {
+                    availabilityMessageEl.textContent = 'Seleziona un orario:';
+                    data.available_slots.forEach(slot => {
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.className = 'time-slot-button';
+                        button.textContent = slot;
+                        button.addEventListener('click', () => {
+                            // Remove 'selected' from other buttons
+                            document.querySelectorAll('.time-slot-button.selected').forEach(btn => btn.classList.remove('selected'));
+                            // Add 'selected' to clicked button
+                            button.classList.add('selected');
+                            selectedTimeSlotInput.value = slot; // Store selected time
+                        });
+                        timeSlotsContainer.appendChild(button);
+                    });
+                } else {
+                    availabilityMessageEl.textContent = data.message || 'Nessun orario disponibile per questa data.';
+                }
+            } catch (error) {
+                console.error('Error fetching availability:', error);
+                availabilityMessageEl.textContent = error.message;
+            }
+        });
+        
+        // Set min attribute for date picker to today
+        bookingDateInput.min = new Date().toISOString().split('T')[0];
+
+
+        bookingForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            bookingStatusMessageEl.textContent = '';
+            bookingStatusMessageEl.classList.remove('text-green-600', 'text-red-600');
+
+            const petId = petSelectEl.value;
+            const selectedDate = bookingDateInput.value;
+            const selectedTime = selectedTimeSlotInput.value; // This is already the hidden input
+
+            if (!petId) {
+                bookingStatusMessageEl.textContent = 'Per favore, seleziona un animale.';
+                bookingStatusMessageEl.classList.add('text-red-600');
+                return;
+            }
+            if (!selectedTime) { // Check the hidden input's value
+                bookingStatusMessageEl.textContent = 'Per favore, seleziona un orario.';
+                bookingStatusMessageEl.classList.add('text-red-600');
+                return;
+            }
+
+            const appointmentTime = `${selectedDate} ${selectedTime}`;
+            const submitButton = bookingForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+            submitButton.textContent = 'Prenotazione in corso...';
+            
+            try {
+                const response = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        pet_id: parseInt(petId),
+                        service_id: parseInt(serviceId),
+                        appointment_time: appointmentTime
+                    }),
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    bookingStatusMessageEl.textContent = result.message || 'Prenotazione confermata con successo!';
+                    bookingStatusMessageEl.classList.add('text-green-600');
+                    bookingForm.reset();
+                    timeSlotsContainer.innerHTML = '';
+                    availabilityMessageEl.textContent = '';
+                    selectedTimeSlotInput.value = '';
+                    // Consider redirecting or updating UI further
+                    alert('Prenotazione confermata! Sarai reindirizzato alla pagina profilo.');
+                    window.location.href = 'profilo.html#myBookingsSection'; // Corrected anchor
+                } else {
+                    bookingStatusMessageEl.textContent = result.error || 'Errore durante la prenotazione.';
+                    bookingStatusMessageEl.classList.add('text-red-600');
+                }
+            } catch (error) {
+                console.error('Booking submission error:', error);
+                bookingStatusMessageEl.textContent = 'Si è verificato un errore. Riprova.';
+                bookingStatusMessageEl.classList.add('text-red-600');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                submitButton.textContent = originalButtonText;
+            }
+        });
+
+        initializePage();
+    });
+    </script>
+</body>
 </html>
